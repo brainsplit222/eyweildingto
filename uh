@@ -768,17 +768,11 @@ local AutoBypassToggle = Main:CreateToggle({
                                         if autoBool then
                                             local rizz = bypassMessage(TextBox.Text)
                                             sendMessage(rizz)
-                                        end
-                                        if not autoBool then
-                                            ScreenGui:Destroy()
+                                        else
                                             ScreenGui = nil
                                             TextBox = nil
-            
-                                            inputConnection:Disconnect()
-                                            inputConnection = nil
                                         end
                                         if ScreenGui then
-                                            ScreenGui:Destroy()
                                             ScreenGui = nil
                                             TextBox = nil
                                         end
@@ -788,11 +782,9 @@ local AutoBypassToggle = Main:CreateToggle({
                         end)
                     else
                         if inputConnection then
-                            inputConnection:Disconnect()
                             inputConnection = nil
                         end
                         if ScreenGui then
-                            ScreenGui:Destroy()
                             ScreenGui = nil
                             TextBox = nil
                         end
@@ -837,7 +829,6 @@ local AutoBypassToggle = Main:CreateToggle({
                         end
                     else
                         if legacyChatConnection then
-                            legacyChatConnection:Disconnect()
                             legacyChatConnection = nil
                         end
                     end
@@ -937,7 +928,6 @@ if autoBool and UserInputService:GetPlatform() == Enum.Platform.IOS or UserInput
 		end
 		slideIn()
 		task.wait(0.01)
-		--TextBox:CaptureFocus()
 		if autoBool then
 			local rizz = bypassMessage(TextBox.Text)
 			sendMessage(rizz)
