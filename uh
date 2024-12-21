@@ -941,15 +941,7 @@ if autoBool and UserInputService:GetPlatform() == Enum.Platform.IOS or UserInput
 		if autoBool then
 			local rizz = bypassMessage(TextBox.Text)
 			sendMessage(rizz)
-		end
-		if not autoBool then
-			ScreenGui:Destroy()
-			ScreenGui = nil
-			TextBox = nil
-			inputConnection = nil
-		end
-		if autoBool == false then
-			ScreenGui:Destroy()
+        else
 			ScreenGui = nil
 			TextBox = nil
 		end
