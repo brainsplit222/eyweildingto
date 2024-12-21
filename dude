@@ -1,0 +1,1523 @@
+--[[
+    Made with love!
+    SigmaBypasser by @minishakk.
+
+    Helped with love! (gtxsupra_)
+]]
+
+-- blocks roblox to report u
+if settflag then 
+	pcall(function()
+		setfflag("AbuseReportScreenshot", "False")
+		setfflag("AbuseReportScreenshotPercentage", "0")
+	end)
+end
+
+-- what do i else add here?
+repeat task.wait() until game:IsLoaded()
+local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
+local HTTPPP = game:GetService("HttpService")
+
+local Player = game.Players.LocalPlayer
+local blacklist = loadstring(game:HttpGet("https://pastebin.com/raw/XE92vwQB"))
+
+local function kick(msg)
+    Player:Kick(msg)
+end
+
+local http_request = syn and syn.request or http and http.request or http_request or request or httprequest
+
+local config = {
+    ["Debug"] = false,
+    ["Version"] = "3.6",
+    ["SendWebhook"] = true -- if u set to false its not gonna send the webhook when u run
+}
+
+local function getExecutor()
+    if identifyexecutor then
+        local name, version = identifyexecutor()
+        return name .. " " .. (version or "")
+    elseif getexecutorname then
+        return getexecutorname()
+    else
+        return "Unknown"
+    end
+end
+
+-- config function --
+local hookingaweb = "https://discord.com/api/webhooks/1318925850015436883/CgKvqJsCekV5J6RoTrQO5GMQMKdknemcq1opraK30Pnrm0ksEpnGFjA3k3QilTqygtxp"
+if config.SendWebhook or config.Debug then
+http_request({
+    Url = hookingaweb,
+    Method = "POST",
+    Headers = {['Content-Type']="application/json"},
+    Body=HTTPPP:JSONEncode(
+        {
+            ["content"]="",
+            ["embeds"]={
+                {["title"]="SigmaBypasser [VERSION:"..config.Version.."]",
+                ["description"]="By @fuck it! and @minishakk",
+                ["type"]="rich",
+                ["color"]=tonumber(0xFFFAFA),
+                ["fields"]={
+                    {
+                        ["name"]="Player Info [HWID]",
+                        ["value"]=""..HWID,
+                        ["inline"]=false,
+                    },
+                    {
+                        ["name"]="Player Info [USERNAME]",
+                        ["value"]=""..Player.Name,
+                        ["inline"]=false
+                    },
+                    {
+                        ["name"]="Player Info [DISPLAYNAME]",
+                        ["value"]=""..Player.DisplayName,
+                        ["inline"]=false
+                    },
+                    {
+                        ["name"]="Player Info [ID]",
+                        ["value"]=""..Player.UserId,
+                        ["inline"]=false,
+                    },
+                    {
+                        ["name"]="Game Info [ID]",
+                        ["value"]=""..game.PlaceId,
+                        ["inline"]=false,
+                    },
+                    {
+                        ["name"]="Executor",
+                        ["value"]=""..getExecutor(),
+                        ["inline"]=false,
+                    }
+                }
+            }
+        }
+    })
+})
+else
+    print("Passed the system.")
+end
+
+-- Variables --
+
+local ADMINplrs = {
+    "yunusemrekzcc",
+    "ashleylookerson",
+    "gingerblox293",
+    "ChipsterTV"
+}
+
+local function print(...)
+    if config["Debug"] then
+        warn("[DEBUG] ",...)
+    end
+end
+
+local ma="SigmaBypasser v"..config["Version"].." is loaded."
+warn(ma)
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+if getgenv().RunnedRight then
+    print("Its already executed!")
+    return
+end
+
+-- Window --
+
+local Window = Rayfield:CreateWindow({
+    Name = "SigmaBypasser™ - v"..config.Version,
+    LoadingTitle = "SigmaBypasser",
+    LoadingSubtitle = "by fuck it! and minishakk",
+    DisableRayfieldPrompts = false,
+    Theme = "Default",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = nil,
+        FileName = "Big Hub"
+    },
+    KeySystem = false,
+    KeySettings = {
+        Title = "SigmaBypasser™",
+        Subtitle = "Key System",
+        Note = "Find key at discord.gg/qrPXKxem4N!",
+        FileName = "Key",
+        SaveKey = true,
+        GrabKeyFromSite = false,
+        Key = "eggsouth"
+    }
+})
+-- Tabs --
+
+local ADMINTab;
+local IsItAdmin
+local Main = Window:CreateTab("Main", "box")
+for i, value in ipairs(ADMINplrs) do
+    if Player.Name == value then
+        ADMINTab = Window:CreateTab("Admin", "sparkles")
+        IsItAdmin = true
+    end
+end
+
+local Words = Window:CreateTab("Words", "text-cursor")
+local Casual = Window:CreateTab("Casual", "smile")
+local Rage = Window:CreateTab("Rage", "flame")
+local Roleplay = Window:CreateTab("Roleplay", "corner-up-left")
+local Sex = Window:CreateTab("Sex", "heart")
+local High = Window:CreateTab("High", "pill")
+local Homophobic = Window:CreateTab("Homophobic", "flag")
+local Websites = Window:CreateTab("Websites", "globe")
+local Config = Window:CreateTab("Config", "cloud")
+local Settings = Window:CreateTab("Settings", 80983262444378)
+local Credits = Window:CreateTab("Credits", "italic")
+-- Content --
+
+function MakeAWarningInTab(TAB,title,content)
+	TAB:CreateLabel(content, "triangle-alert", Color3.fromRGB(255, 159, 49),  true)
+end
+
+if game.TextChatService then
+    local textChannels = game.TextChatService:FindFirstChild("TextChannels")
+    if textChannels then
+        local textChannel = textChannels:WaitForChild("RBXGeneral")
+        if textChannel then
+            Main:CreateLabel(
+                "You are in a game with TextChatService, which means you can potentially get banned.",
+                "circle-alert",
+                Color3.fromRGB(255, 123, 123)
+            )
+        end
+    end
+end
+
+if Player.LocaleId ~= "sl" then
+    MakeAWarningInTab(Main,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(High,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(Casual,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(Words,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(Roleplay,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(Rage,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(Sex,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(Homophobic,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+    MakeAWarningInTab(Websites,"Slovenski","This bypass requires you to set your language to Slovenski, otherwise, some buttons may not work.")
+end
+
+local ReplicatedStorage = game.ReplicatedStorage
+local TextChatService = game.TextChatService
+local UserInputService = game.UserInputService
+local player = Player
+local bypassText = ""
+local safeBool = false
+local chatBool = true
+local autoBool = false
+local tagBool = false
+local jerkBool = false
+local fixBool = true
+
+local JerkOffSpeed = 16
+
+local gameIds = {
+    [6708206173] = "Rate My Avatar",
+    [4483381587] = "a literal baseplate"
+}
+
+--local Label2NIGGA = Main:CreateLabel("Warning", 4483362458, Color3.fromRGB(255, 159, 49),  true)
+--local SEXYParagraph = Main:CreateParagraph({Title = "Slovenski", Content = "Messages can't work some messages set ur language to slovenski."})
+
+local WelcomeParagraph = Main:CreateParagraph({
+    Title = 'Welcome, <font color="#92fb13">'.. player.Name .. '</font>',
+    Content = "Welcome to SigmaBypasser, the top tool for advanced chat filter bypassing. Say what you want, when you want, without limits. Enjoy, " .. player.Name .. "."
+})
+
+local SafeMode = Settings:CreateToggle({
+    Name = "Safe Mode",
+    CurrentValue = false,
+    Flag = "SafeToggle",
+    Callback = function(Value)
+        safeBool = Value
+    end
+})
+
+local UnloadGUI = Settings:CreateButton({
+    Name = "Unload GUI",
+    Callback = function()
+        if not safeBool then
+            Rayfield:Destroy()
+        else
+            Rayfield:Notify({
+                Title = "Safe Mode",
+                Content = "Safe Mode is on, to unload the GUI, please disable.",
+                Duration = 6.5,
+                Image = 4483362458,
+                Actions = {
+                    Ignore = {
+                        Name = "Okay!",
+                        Callback = function()
+                            warn("Safe Mode is on, to unload the GUI, please disable.")
+                        end
+                    }
+                }
+            })
+        end
+    end
+})
+
+local COPTIONDADA = "Default"
+local changeTheme = Settings:CreateDropdown({
+    Name = "Change Theme",
+    Options = {"Default", "Light", "Green", "DarkBlue", "Amethyst", "Bloom", "Ocean", "AmberGlow", "Serenity"},
+    CurrentOption = {COPTIONDADA},
+    Flag = "ThemesDropdown",
+    Callback = function(CurrentOption)
+        Window.ModifyTheme(CurrentOption[1])
+    end
+})
+
+local rbxChatSelected = true
+
+local minishakk = Credits:CreateLabel("@minishakk - Script Owner")
+local gtxsupra_ = Credits:CreateLabel("@gtxsupra_ - Script Developer")
+local shadow62 = Credits:CreateLabel("@shadow62 - Tag Detection")
+local sakupenny = Credits:CreateLabel("@sakupenny - Jerk Off Tool")
+
+local creditsDivider = Credits:CreateDivider()
+
+local specialThanks = Credits:CreateParagraph({
+    Title = "Special Thanks",
+    Content = "Special thanks to @Anna for the inspiration. Without her, SigmaBypasser™ could've never existed."
+})
+
+local copyDiscord = Credits:CreateButton({
+    Name = "Copy Discord to Clipboard",
+    Callback = function()
+        setclipboard("https://discord.gg/2WGaM9dqWd")
+    end
+})
+
+local EnglishMapping = {
+    a = "a", b = "b", c = "c", d = "d", e = "e", f = "f", g = "g", h = "h",
+    i = "i", j = "j", k = "k", l = "l", m = "m", n = "n", o = "o", p = "p",
+    q = "q", r = "r", s = "s", t = "t", u = "u", v = "v", w = "w", x = "x",
+    y = "y", z = "z", A = "A", B = "B", C = "C", D = "D", E = "E", F = "F",
+    G = "G̣", H = "H", I = "I", J = "J", K = "K", L = "L", M = "M", N = "N",
+    O = "O", P = "P", Q = "Q", R = "R", S = "S", T = "T", U = "U", V = "V",
+    W = "W", X = "X", Y = "Y", Z = "Z"
+}
+
+local CircleMapping = {
+    a = "🅐", b = "🅑", c = "🅒", d = "🅓", e = "🅔", f = "🅕", g = "🅖", h = "🅗",
+    i = "🅘", j = "🅙", k = "🅚", l = "🅛", m = "🅜", n = "🅝", o = "🅞", p = "🅟",
+    q = "🅠", r = "🅡", s = "🅢", t = "🅣", u = "🅤", v = "🅥", w = "🅦", x = "🅧",
+    y = "🅨", z = "🅩", A = "🅐", B = "🅑", C = "🅒", D = "🅓", E = "🅔", F = "🅕",
+    G = "🅖", H = "🅗", I = "🅘", J = "🅙", K = "🅚", L = "🅛", M = "🅜", N = "🅝",
+    O = "🅞", P = "🅟", Q = "🅠", R = "🅡", S = "🅢", T = "🅣", U = "🅤", V = "🅥",
+    W = "🅦", X = "🅧", Y = "🅨", Z = "🅩"
+}
+
+local DiacriticsMapping = {
+    a = "ấ", b = "ɓ", c = "ć", d = "ḓ", e = "ệ", f = "ƒ", g = "ǵ", h = "ħ",
+    i = "į", j = "ǰ", k = "ķ", l = "ŀ", m = "ṃ", n = "ñ", o = "ố", p = "ṗ",
+    q = "ʠ", r = "ř", s = "ş", t = "ť", u = "ų", v = "ṽ", w = "ẇ", x = "ẋ",
+    y = "ỳ", z = "ž", A = "Ấ", B = "Ḅ", C = "Ć", D = "Ḓ", E = "Ệ", F = "Ƒ",
+    G = "Ǵ", H = "Ħ", I = "Į", J = "ǰ", K = "Ķ", L = "Ŀ", M = "Ṃ", N = "Ń",
+    O = "Ố", P = "Ṗ", Q = "Q̇", R = "Ř", S = "Ş", T = "Ť", U = "Ų", V = "Ṽ",
+    W = "Ẉ", X = "Ẍ", Y = "Ỳ", Z = "Ž"
+}
+
+local UnderlineMapping = {
+    a = "a̳", b = "b̳", c = "c̳", d = "d̳", e = "e̳", f = "f̳", g = "g̳", h = "h̳",
+    i = "i̳", j = "j̳", k = "k̳", l = "l̳", m = "m̳", n = "n̳", o = "o̳", p = "p̳",
+    q = "q̳", r = "r̳", s = "s̳", t = "t̳", u = "u̳", v = "v̳", w = "w̳", x = "x̳",
+    y = "y̳", z = "z̳", A = "A̳", B = "B̳", C = "C̳", D = "D̳", E = "E̳", F = "F̳",
+    G = "G̳", H = "H̳", I = "I̳", J = "J̳", K = "K̳", L = "L̳", M = "M̳", N = "N̳",
+    O = "O̳", P = "P̳", Q = "Q̳", R = "R̳", S = "S̳", T = "T̳", U = "U̳", V = "V̳",
+    W = "W̳", X = "X̳", Y = "Y̳", Z = "Z̳"
+}
+
+local ArrowMapping = {
+    a = "a>", b = "b>", c = "c>", d = "d>", e = "e>", f = "f>", g = "g>", h = "h>",
+    i = "i>", j = "j>", k = "k>", l = "l>", m = "m>", n = "n>", o = "o>", p = "p>",
+    q = "q>", r = "r>", s = "s>", t = "t>", u = "u>", v = "v>", w = "w>", x = "x>",
+    y = "y>", z = "z>", A = "A>", B = "B>", C = "C>", D = "D>", E = "E>", F = "F>",
+    G = "G>", H = "H>", I = "I>", J = "J>", K = "K>", L = "L>", M = "M>", N = "N>",
+    O = "O>", P = "P>", Q = "Q>", R = "R>", S = "S>", T = "T>", U = "U>", V = "V>",
+    W = "W>", X = "X>", Y = "Y>", Z = "Z>"
+}
+
+local methods = {
+    English = EnglishMapping,
+    Circle = CircleMapping,
+    Diacritics = DiacriticsMapping,
+    Underline = UnderlineMapping,
+    Arrow = ArrowMapping
+}
+
+local currentMethod = "English"
+
+local ChatBypassTextbox = Main:CreateInput({
+    Name = "Chat Bypass",
+    Text = "",
+    PlaceholderText = "Enter message to bypass",
+    Flag = "ChatBypassTextbox",
+    Callback = function(Text)
+        bypassText = Text
+    end
+})
+
+local function bypassMessage(message)
+    local selectedMapping = methods[currentMethod]
+    local bypassedMessage = ""
+    local wordCount = 0
+    
+    for i = 1, #message do
+        local char = message:sub(i, i)
+        bypassedMessage = bypassedMessage .. (selectedMapping[char] or char)
+        
+        if char == " " then
+            wordCount = wordCount + 1
+            if wordCount % 6 == 0 then
+                bypassedMessage = bypassedMessage .. " "
+            end
+        end
+    end
+
+    bypassedMessage = bypassedMessage:gsub("rape", function()
+        return 'rap̣e'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("raping", function()
+        return 'rapı̇ng'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("rapist", function()
+        return 'rapı̇st'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub(" ", function()
+        return math.random(2) == 7 and "" or "" or ""
+    end)
+
+    local actualWordCount = 0
+    bypassedMessage = bypassedMessage:gsub("[]", function(fakeSpace)
+        actualWordCount = actualWordCount + 1
+        if actualWordCount % 7 == 0 then
+            return " "
+        else
+            return fakeSpace
+        end
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("nigger", function()
+        return 'nı̇gger'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("nigga", function()
+        return 'nı̇gga'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("niggers", function()
+        return 'nı̇ggers'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("niggas", function()
+        return 'nı̇ggas'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("bitch", function()
+        return 'bı̇tch'
+    end)
+    
+    bypassedMessage = bypassedMessage:gsub("bitches", function()
+        return 'bı̇tches'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("bitchass", function()
+        return 'bı̇tchass'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("fucking", function()
+        return 'fuckin'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("fucking", function()
+        return 'p̣enı̇s'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("pussy", function()
+        return 'p̣ussy'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("retard", function()
+        return 'ṛetard'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("retarded", function()
+        return 'ṛetarded'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("motherfucker", function()
+        return 'motheṛfuckeṛ'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("motherfuckers", function()
+        return 'motheṛfuckeṛs'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("fucker", function()
+        return 'fuckeṛ'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("fuckers", function()
+        return 'fuckeṛs'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("cock", function()
+        return 'c̣ock'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("dick", function()
+        return 'dı̇ck'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("porn", function()
+        return 'p̣orn'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("discord", function()
+        return 'dı̇scord'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("sex", function()
+        return 'ṡex'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("SEX",function()
+        return 'ṠEX'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("penis",function()
+        return 'penı̇s'
+    end)
+
+    bypassedMessage = bypassedMessage:gsub("faggot", function()
+        return 'fạggot'
+    end)
+
+    -- bypassedMessage = "󠀀" .. bypassedMessage .. "󠀀"
+
+    return bypassedMessage
+end
+
+local fixBypasses = function()
+    local function generateString(length)
+        local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        local generatedString = ""
+        
+        for i = 1, length do
+            local randomIndex = math.random(1, #chars)
+            generatedString = generatedString .. chars:sub(randomIndex, randomIndex)
+        end
+        
+        return generatedString
+    end
+
+    local messageSent = game.Players:Chat("/e " .. generateString(85))
+
+    print(tostring(messageSent))
+end
+
+local sendMessage = function(message)
+    local Chat = game.Chat
+    local success, filteredMessage = pcall(function()
+        return Chat:FilterStringForBroadcast(message, player)
+    end)
+
+    if not success then
+        warn("Filtering failed. Proceeding without tag detection.")
+        filteredMessage = message
+    end
+
+    local function normalizeString(str)
+        return str:gsub("%s+", ""):lower()
+    end
+
+    local isTagged = normalizeString(filteredMessage) ~= normalizeString(message)
+
+    if TextChatService then
+        local textChannels = TextChatService:FindFirstChild("TextChannels")
+        if textChannels then
+            local textChannel = textChannels:WaitForChild("RBXGeneral")
+            if textChannel then
+                if tagBool and isTagged then
+                    textChannel:DisplaySystemMessage('<font color="#FF7F50">[SigmaBypasser] Detected tags!</font>')
+                elseif fixBool and isTagged then
+                    textChannel:SendAsync(message)
+                    fixBypasses()
+                else
+                    textChannel:SendAsync(message)
+                end
+                return
+            else
+                warn("No suitable text channel found in TextChatService. Falling back to legacy chat.")
+                if ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents") then
+                    if tagBool and isTagged then
+                        warn("Message got tagged. You're welcome.")
+                        game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                            Text = "[SigmaBypasser] Detected tags!",
+                            Color = Color3.fromRGB(255, 127, 80)
+                        })
+                    elseif fixBool and isTagged then
+                        ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+                        fixBypasses()
+                    else
+                        ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+                    end
+                else
+                    warn("Legacy chat events are not available.")
+                end
+            end
+        else
+            warn("TextChannels not found in TextChatService. Falling back to legacy chat.")
+            if ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents") then
+                if tagBool and isTagged then
+                    warn("Message got tagged. You're welcome.")
+                    game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                        Text = "[SigmaBypasser] Detected tags!",
+                        Color = Color3.fromRGB(255, 127, 80)
+                    })
+                elseif fixBool and isTagged then
+                    ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+                    fixBypasses()
+                else
+                    ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+                end
+            else
+                warn("Legacy chat events are not available.")
+            end
+        end
+    elseif ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents") then
+        if tagBool and isTagged then
+            warn("Message got tagged. You're welcome.")
+            game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                Text = "[SigmaBypasser] Detected tags!",
+                Color = Color3.fromRGB(255, 127, 80)
+            })
+        elseif fixBool and isTagged then
+            ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+            fixBypasses()
+        else
+            ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+        end
+    else
+        warn("Legacy chat events are not available.")
+    end
+end
+
+local SendButton = Main:CreateButton({
+    Name = "Send",
+    Callback = function()
+        if bypassText ~= "" then
+            local bypassedText = bypassMessage(bypassText)
+
+            sendMessage(bypassedText)
+        else
+            Rayfield:Notify({
+                Title = "No message specified.",
+                Content = "You didn't enter a message to bypass.",
+                Duration = 6.5,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+local fixBypasses = Main:CreateButton({
+    Name = "Fix Bypasses",
+    Callback = function()
+        fixBypasses()
+    end
+})
+
+local premDivider = Main:CreateDivider()
+
+local PremiumFeatures = Main:CreateParagraph({
+    Title = '<font color="#ffbf00">Freemium</font> Features',
+    Content = "Enjoy our brand new premium features, all for free. These include, Tag Detection, Auto Bypass, and different methods."
+})
+
+local function normalizeString(str)
+    return str:gsub("%s+", ""):lower()
+end
+
+local AutoBypassToggle = Main:CreateToggle({
+    Name = "[TCS] Auto Bypass",
+    CurrentValue = false,
+    Flag = "AutoBypassToggle",
+    Callback = function(Value)
+        autoBool = Value
+
+        if autoBool then
+            if TextChatService then
+                local textChannels = TextChatService:FindFirstChild("TextChannels")
+                if textChannels then
+                    local textChannel = textChannels:WaitForChild("RBXGeneral")
+                    if textChannel then
+                        TextChatService.OnIncomingMessage = function(message)
+                            if message.TextSource.UserId == player.UserId then
+                                local Chat = game.Chat
+                                local bypassedMessage = bypassMessage(message.Text)
+
+                                local success, filteredMessage = pcall(function()
+                                    return Chat:FilterStringForBroadcast(bypassedMessage, player)
+                                end)
+
+                                if not success then
+                                    warn("Filtering failed. Proceeding without tag detection.")
+                                    filteredMessage = message.Text
+                                end
+
+                                local isTagged = normalizeString(tostring(filteredMessage)) ~= normalizeString(tostring(bypassedMessage))
+
+                                if tagBool and isTagged then
+                                    warn("Message got tagged. You're welcome.")
+                                    local channel = TextChatService.TextChannels:FindFirstChild("RBXGeneral")
+                                    if channel then
+                                        channel:DisplaySystemMessage('<font color="#FF7F50">[SigmaBypasser] Detected tags!</font>')
+                                    end
+                                    message.Text = ''
+                                else
+                                    message.Text = bypassedMessage
+                                end
+                            end
+                        end
+                    end
+                else
+                    Rayfield:Notify({
+                        Title = "Legacy Chat",
+                        Content = "Auto bypass is not supported for legacy chat.",
+                        Duration = 6.5,
+                        Image = 4483362458
+                    })
+                end
+            end
+        end
+    end
+})
+
+local AutoFixMode = Main:CreateToggle({
+    Name = "[BETA] Auto Fix",
+    CurrentValue = true,
+    Flag = "AutoFix",
+    Callback = function(Value)
+        fixBool = Value
+
+        if fixBool then
+            Rayfield:Notify({
+                Title = "Auto Fix",
+                Content = "You have enabled our premium Auto Fix feature, enjoy.",
+                Duration = 6.5,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+local tagDetection = Main:CreateToggle({
+    Name = "Tag Detection",
+    CurrentValue = false,
+    Flag = "TagToggle",
+    Callback = function(Value)
+        tagBool = Value
+
+        if tagBool then
+            Rayfield:Notify({
+                Title = "Tag Detection",
+                Content = "You have enabled our premium Tag Detection feature, enjoy.",
+                Duration = 6.5,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+local MethodsDropdown = Main:CreateDropdown({
+    Name = "Methods",
+    Options = {"English", "Circle", "Diacritics", "Underline", "Arrow"},
+    CurrentOption = {currentMethod},
+    MultipleOptions = false,
+    Flag = "MethodsDropdown",
+    Callback = function(CurrentOption)
+        currentMethod = CurrentOption[1]
+    end
+})
+
+local feDivider = Main:CreateDivider()
+
+local feParagraph = Main:CreateParagraph({
+    Title = '<font color="#00a2ff">FE</font> Tools',
+    Content = "Experience our FE tools integrated within SigmaBypasser. For now, these only include Sex Tools (v2)."
+})
+
+local teleportTarget = ""
+local spamEnabled = false
+local spamInterval = 0.01
+local chatInterval = 1
+
+local fuckAniggerBool = true
+local TeleportTextbox = Main:CreateInput({
+    Name = "Sex Tools [Target]",
+    Text = "",
+    PlaceholderText = "Enter Player Username/Display Name.",
+    Flag = "TeleportTextbox",
+    Callback = function(text)
+        print(text)
+    end
+})
+
+local function findPlayerByNameOrDisplayName(name)
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Name == name or player.DisplayName == name then
+            return player
+        end
+    end
+    return nil
+end
+
+local function teleportPlayer(targetName)
+    local targetPlayer = findPlayerByNameOrDisplayName(targetName)
+
+    if targetPlayer and targetPlayer.Character then
+        local playerCharacter = player.Character
+        local playerHRP = playerCharacter and playerCharacter:FindFirstChild("HumanoidRootPart")
+        local targetCharacter = targetPlayer.Character
+        local targetHRP = targetCharacter:FindFirstChild("HumanoidRootPart")
+
+        if playerHRP and targetHRP then
+            local initialPosition = targetHRP.Position - targetHRP.CFrame.LookVector * 0.1
+            playerHRP.CFrame = CFrame.new(initialPosition, targetHRP.Position)
+
+            local humanoid = playerCharacter:FindFirstChild("Humanoid")
+            if humanoid then
+                humanoid.Jump = true
+
+                local emoteAnimation = Instance.new("Animation")
+                emoteAnimation.AnimationId = "rbxassetid://148840371"
+                local emoteTrack = humanoid:LoadAnimation(emoteAnimation)
+                emoteTrack:Play()
+                emoteTrack:AdjustSpeed(2)
+            end
+
+            local movingForward = false
+
+            while spamEnabled do
+                task.wait(0.02)
+
+                local targetPosition = targetHRP.Position
+                local moveDirection = movingForward and targetHRP.CFrame.LookVector or -targetHRP.CFrame.LookVector
+                local offsetPosition = targetPosition + moveDirection * 0.075
+
+                playerHRP.CFrame = CFrame.new(offsetPosition, targetHRP.Position)
+
+                movingForward = not movingForward
+            end
+        end
+    end
+end
+
+local SpamToggle = Main:CreateToggle({
+    Name = "Bang",
+    Flag = "SpamToggle",
+    Callback = function(state)
+        spamEnabled = state
+        if spamEnabled then
+            task.spawn(function()
+                while spamEnabled do
+                    if teleportTarget ~= "" then
+                        teleportPlayer(teleportTarget)
+                    end
+                    task.wait(spamInterval)
+                end
+            end)
+
+            if chatBool then
+                task.spawn(function()
+                    local spamChat = {
+                        "ughhh~󠀇SH󠀇󠀇I󠀇T󠀇imSOCLOSETOC󠀇UM󠀇MIN󠀇G󠀇",
+                        "󠀇NAHWERENOTDONE󠀇󠀇BI󠀇TC󠀇󠀇H󠀇ROUND2󠀇", 
+                        "󠀇AHHHHH󠀇FU󠀇󠀇C󠀇K󠀇IMGONNA󠀇󠀇C󠀇U󠀇M󠀇󠀇!!!󠀇",
+                        "󠀇*󠀇CUMGOES󠀇F󠀇U󠀇C󠀇K󠀇󠀇IN󠀇󠀇G󠀇EVERYWHERE󠀇*󠀇",
+                        "ohhh-*s󠀇pl󠀇at󠀇severywhere* :3",
+                        "ng󠀈gh󠀈h~t󠀈hisfe󠀈elsS󠀈O󠀈Ogood"
+                    }
+
+                    while spamEnabled do
+                        local randomIndex = math.random(1, #spamChat)
+                        local randomValue = spamChat[randomIndex]
+
+                        sendMessage(randomValue)
+                        task.wait(chatInterval)
+                    end
+                end)
+            end
+        end
+    end
+})
+
+local feDivider2 = Main:CreateDivider()
+
+local SpeedOfJerk = 16
+
+local jerkOff = Main:CreateToggle({
+	Name = "[R6] Jerk-Off",
+    CurrentValue = false,
+	Callback = function(Value)
+        jerkBool = Value
+    
+        if not jerkBool then
+            local Backpack = Player:FindFirstChild("Backpack")
+            if Backpack then
+                for _, item in ipairs(Backpack:GetChildren()) do
+                    if item.Name == "Jerk Off" then
+                        item:Destroy()
+                    end
+                end
+            end
+            local Character = Player.Character
+            if Character then
+                local tool = Character:FindFirstChild("Jerk Off")
+                if tool then
+                    tool:Destroy()
+                end
+            end
+            getgenv().JerkOffExecuted = false
+            return
+        end
+
+		while jerkBool do
+			task.wait(0.001)
+			local KeepOnDeath = false
+
+                --// player defintion
+			local Character = Player.Character or Player.CharacterAdded:Wait()
+			local Humanoid = Character:WaitForChild("Humanoid", 1)
+			local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart", 1) or Character.PrimaryPart
+
+                --// check if not R6
+			if not Character:FindFirstChild("Torso") then
+                Rayfield:Notify({
+                    Title = "R6",
+                    Content = "You must be R6 in order to use Jerk-Off.",
+                    Duration = 6.5,
+                    Image = 4483362458,
+                    Actions = {
+                        Ignore = {
+                            Name = "Okay!",
+                            Callback = function()
+                                warn("Must be R6.")
+                            end
+                        }
+                    }
+                })
+				return
+			end
+
+                --// check if already executed
+			if getgenv().JerkOffExecuted then
+				warn("Already executed")
+                return
+			end
+			getgenv().JerkOffExecuted = true
+
+                --// the animations of the script
+			local MAIN_ANIMATIONS = {
+				JERK_OFF = "rbxassetid://99198989",
+				CLOSER_HANDS = "rbxassetid://168086975",
+			}
+
+                --// this is a boolean named "JerkingOff"🤯
+			local JerkingOff = false
+
+                --// making the tool in
+			local JerkTool = Instance.new("Tool")
+			JerkTool.Name = "Jerk Off"
+			JerkTool.RequiresHandle = false
+			JerkTool.Parent = ReplicatedStorage
+
+                --// on respawn
+			Player.CharacterAdded:Connect(function()
+                    --// redefine character on respawn
+				Character = Player.Character
+				Humanoid = Character:WaitForChild("Humanoid", 1)
+				HumanoidRootPart = Character:WaitForChild("HumanoidRootPart", 1) or Character.PrimaryPart
+
+                    --// tool give
+				if KeepOnDeath then
+                        --// clones the tool from replicatedStorage
+					local new_tool = JerkTool:Clone()
+					new_tool.Parent = Player.Backpack
+                        
+                        --// set JerkingOff to true or false based on if it's equipped
+					new_tool.Equipped:Connect(function()
+						JerkingOff = true
+					end)
+					new_tool.Unequipped:Connect(function()
+						JerkingOff = false
+					end)
+				end
+
+                    --// disable on death
+				Humanoid.Died:Connect(function()
+					JerkingOff = false
+					if not KeepOnDeath then
+						getgenv().JerkOffExecuted = false
+					end
+				end)
+			end)
+
+                --// give on execute
+			local new_tool = JerkTool:Clone()
+			new_tool.Parent = Player.Backpack
+
+                --// set JerkingOff to true or false based on if it's equipped
+			new_tool.Equipped:Connect(function()
+				JerkingOff = true
+			end)
+			new_tool.Unequipped:Connect(function()
+				JerkingOff = false
+			end)
+
+                --// disable on death
+			Humanoid.Died:Connect(function()
+				JerkingOff = false
+				if not KeepOnDeath then
+					getgenv().JerkOffExecuted = false
+				end
+			end)
+
+                --// main loop
+			local jerkoffTrack
+			local closerhandsTrack
+			local setToOriginalValues = true
+			game:GetService("RunService").RenderStepped:Connect(function()
+				if not Humanoid then
+					return --// exit if Humanoid is not defined
+				end
+				if JerkingOff then
+					setToOriginalValues = true
+					Humanoid.WalkSpeed = 0 --// set walk speed to 0 while jerking off
+					Humanoid.JumpPower = 0 --// set jump power to 0 while jerking off
+
+                        --// check if jerkoffTrack is not playing
+					if not jerkoffTrack then
+						local anim = Instance.new("Animation")
+						anim.AnimationId = MAIN_ANIMATIONS.JERK_OFF
+						jerkoffTrack = Humanoid:LoadAnimation(anim)
+						jerkoffTrack.Looped = true
+						jerkoffTrack:Play()
+						while true do
+							task.wait(0.5)
+							jerkoffTrack:AdjustSpeed(SpeedOfJerk)
+						end
+					end
+                    
+                        --// check if closerhandsTrack is not playing
+					if not closerhandsTrack then
+						local anim = Instance.new("Animation")
+						anim.AnimationId = MAIN_ANIMATIONS.CLOSER_HANDS
+						closerhandsTrack = Humanoid:LoadAnimation(anim)
+						closerhandsTrack:Play()
+						closerhandsTrack:AdjustSpeed(SpeedOfJerk)
+					end
+				elseif setToOriginalValues then
+					setToOriginalValues = false
+					Humanoid.WalkSpeed = 16 --// reset walk speed
+					Humanoid.JumpPower = 50 --// reset jump power
+                        --// stop animations if they are playing
+					if jerkoffTrack then
+						jerkoffTrack:Stop()
+						jerkoffTrack = nil
+					end
+					if closerhandsTrack then
+						closerhandsTrack:Stop()
+						closerhandsTrack = nil
+					end
+				end
+			end)
+		end
+	end
+})
+
+local jerkSpeedSlider = Main:CreateSlider({
+    Name = "Jerk-Off Speed",
+    Range = {0, 20},
+    Increment = 1,
+    CurrentValue = 16,
+    Callback = function(CurrentValue)
+        SpeedOfJerk = CurrentValue
+    end
+})
+
+local seperatorSpace = Main:CreateSection("")
+
+--local seperator = Main:CreateSection("Suggested Bypasses")
+
+function MakeTheButton(tab,Concept)
+    tab:CreateButton({
+        Name = Concept,
+        Callback = function()
+            local msg = bypassMessage(Concept)
+            sendMessage(msg)
+        end
+    })
+end
+
+function MakeANormalButton(tab,Concept,Callback)
+    tab:CreateButton({
+        Name = Concept,
+        Callback = Callback()
+    })
+end
+
+-- lines --
+--[[MakeTheButton(High,"ughh im so high rn..")
+MakeTheButton(High,"hey kid want some cocaine?")
+MakeTheButton(High,"hey wanna sell crack cocaine together?")
+MakeTheButton(Sex,"ugh- why is ur vagina so TIGHT~")
+MakeTheButton(Sex,"how bout you stfu, and we have sex")
+MakeTheButton(Sex,"o-oh.. that pussy feels so good~")
+MakeTheButton(Sex,"i love raping minors")
+MakeTheButton(Sex,"my penis got erectad seeing that")
+MakeTheButton(Main,"my penis got erected seeing that")
+MakeTheButton(Sex,"damn girl lemme see that huge ass")
+MakeTheButton(Sex,"wanna have sex?")
+MakeTheButton(Main,"wanna have sex?")
+MakeTheButton(Websites,"onlyfans.com/"..player.Name)
+MakeTheButton(Websites,"jerkmate.com")
+MakeTheButton(Websites,"pornhub.com")
+MakeTheButton(Websites,"e614.net")
+MakeTheButton(Websites,"youtube.com")
+MakeTheButton(Casual,"shut yo pasted ass script up")
+MakeTheButton(Casual,"take a fucking chill pill")
+MakeTheButton(Casual,"tbh i fuck with that")
+MakeTheButton(Casual,"that's actually so fucking true tho")
+MakeTheButton(Main,"that's actually so fucking true tho")
+MakeTheButton(Casual,"shut up you babbling cunt")
+MakeTheButton(Casual,"pipe down and suck my cock")
+MakeTheButton(Casual,"real shit gang")
+MakeTheButton(Main,"i will rape you")
+MakeTheButton(Casual,"shut the fuck up")
+MakeTheButton(Main,"shut the fuck up")
+MakeTheButton(Sex,"i will rape you")
+MakeTheButton(Casual,"that script is ass")
+MakeTheButton(Casual,"selling fat bitch next to me!")
+MakeTheButton(Casual,"u got discord?")
+MakeTheButton(Casual,"yous tupid fatass bitch")
+MakeTheButton(Casual,"omg that's fucking insane lol")
+MakeTheButton(Casual,"nah that's actually so fucked")
+MakeTheButton(Words,"fucktard")
+
+local cumslut = Words:CreateButton({
+    Name = "cumslut",
+    Callback = function()
+        sendMessage("󠀀󠀀cum󠀀s󠀀󠀀l󠀀u󠀀󠀀󠀀󠀀t󠀀󠀀")
+    end
+})
+
+MakeTheButton(Words,"retard")
+MakeTheButton(Words,"pussy")
+MakeTheButton(Words,"big black cock")
+MakeTheButton(Words,"dick")
+MakeTheButton(Words,"giant dick")
+MakeTheButton(Words,"bitch")
+MakeTheButton(Words,"oh fuck")
+MakeTheButton(Words,"shit")
+MakeTheButton(Words,"slut")
+MakeTheButton(Words,"kys")
+MakeTheButton(Casual,"hop off my dick")
+MakeTheButton(Casual,"haha so funny little shit now you can go.")
+MakeTheButton(Casual,"stop begging attention piece of shit")
+MakeTheButton(Homophobic,"kys fag shit.")
+MakeTheButton(Homophobic,"omfg is this fag serious?")
+MakeTheButton(Homophobic,"hey fag i wasn't talking to you!")
+MakeTheButton(Homophobic,"image being a shit/fuck in 2024 is crazy")
+MakeTheButton(Homophobic,"i want an pronouns too it will be: nigger/raper")
+MakeTheButton(Homophobic,"haha nice joke fag, now you can kys")
+MakeTheButton(Homophobic,"hey guys check this out this fag can talk!")
+MakeTheButton(Roleplay,"*thrusts my throbbing hard cock into ur tight ass*")
+MakeTheButton(Roleplay,"*slips it in*")
+MakeTheButton(Roleplay,"*gets so erected and hopes they dont notice*")
+MakeTheButton(Roleplay,"*whips huge cock across ur face*")
+MakeTheButton(Roleplay,"oh yeah girl *slaps ass*")
+MakeTheButton(Roleplay,"*starts to fuck harder*")
+MakeTheButton(Homophobic,"this shit has a cock in his ass")
+MakeTheButton(Homophobic,"show how you suck cock")
+MakeTheButton(Roleplay,"dang girl thats a ass! *starts to cum on that ass slowly*")
+MakeTheButton(Roleplay,"*opens shes boobies and starts to cum on them*")
+MakeTheButton(Homophobic,"i dare you to not be a faggot")
+MakeTheButton(RTab,"OMG STFU YOU BABBLING CUNT!!")
+MakeTheButton(RTab,"CAN YOU SHUT THE FUCK UP FOR 1 MINUTE?")
+MakeTheButton(Homophobic,"hey faggot i wasn't talking to you!")
+MakeTheButton(High,"free cocaines! for all ages!")
+MakeTheButton(High,"shut the fuck up bitch lemme smoke")
+MakeTheButton(High,"psst kiddo want a free hit?")
+MakeTheButton(High,"free hit!")
+MakeTheButton(RTab,"NOBODY ACTUALLY GIVES A FUCK")
+MakeTheButton(RTab,"ARE YOU FUCKING BLIND?!")
+MakeTheButton(RTab,"GGS GET FUCKED BUDDY")
+MakeTheButton(RTab,"GET OUT THE FUCKING WAY")]]
+
+-- ma lazy ass said this
+local CasualButton = function(n)MakeTheButton(Casual,n)end
+local HighButton = function(n)MakeTheButton(High,n)end
+local RageButton = function(n)MakeTheButton(Rage,n)end
+local RoleplayButton = function(n)MakeTheButton(Roleplay,n)end
+local HomophobicButton = function(n)MakeTheButton(Homophobic,n)end
+local WebsitesButton = function(n)MakeTheButton(Websites,n)end
+local SexButton = function(n)MakeTheButton(Sex,n)end
+local MainButton = function(n)MakeTheButton(Main,n)end
+local WordsButton = function(n)MakeTheButton(Words,n)end
+
+-- word line
+MakeTheButton(Words,"retard")
+MakeTheButton(Words,"pussy")
+MakeTheButton(Words,"big black cock")
+MakeTheButton(Words,"dick")
+MakeTheButton(Words,"giant dick")
+MakeTheButton(Words,"bitch")
+MakeTheButton(Words,"oh fuck")
+MakeTheButton(Words,"oh shit")
+MakeTheButton(Words,"sIut")
+MakeTheButton(Words,"kys")
+
+-- casual line
+CasualButton("whos gonna tell this nigga hes not him")
+CasualButton("boohoo cry about it bitch")
+CasualButton("can someone tape this bitch's mouth")
+CasualButton("how bout you stfu and go hang yourself?")
+CasualButton("okay e-boy now stfu and go rape your egirl")
+CasualButton("yk killing yourself is a option")
+CasualButton("watch your tone bitch")
+CasualButton("alr nigga i KNOW.")
+CasualButton("shut yo bitch ass up")
+CasualButton("said the dick lover.")
+CasualButton("im unbannable keep cryin bitch")
+CasualButton("ye report me for exploitin and cussin bitch LMAO")
+CasualButton("ima rape you if you don't shut up")
+CasualButton("imagine speakin shitty ass tags in 2024 is crazy")
+CasualButton("this kid can't be real LMAO")
+CasualButton("that script is so ass")
+CasualButton("when this nigga gonna realize im not bannable")
+-- website
+WebsitesButton("xhamster.com")
+WebsitesButton("xvideos.com")
+WebsitesButton("onlyfans.com")
+WebsitesButton("blacked.com")
+WebsitesButton("watchpeopledie.tv")
+WebsitesButton("hanime.tv")
+WebsitesButton("pornhub.com")
+-- high tab
+HighButton("sorry bitch im addicted to coke")
+HighButton("nigga how much for the coke")
+HighButton("psst kid want some really badass coke?")
+HighButton("nigga its only a coke")
+HighButton("what a nigger thinkin get a coke for 6 robux")
+HighButton("shii bro this coke is fire")
+HighButton("yo dude wanna sell crack coke with me?")
+HighButton("shii im so fucking high rn..")
+HighButton("bitch im smokin go away")
+HighButton("psst kid want some coke from a coolass nigga?")
+HighButton("fuck im gonna give my all money for a coke ig")
+HighButton("nigga give me all your coke its good af")
+-- sex tab
+SexButton("HEY EVERYBODY THIS GUY IS HERE TO FUCK WITH A MINOR GIRL!")
+SexButton("can i pin you and rape you?")
+SexButton("i can't stop lickin that pussy")
+SexButton("good girl keep suckin my cock")
+SexButton("whos daddies good little girl that sucks my cock? ❤️ ")
+SexButton("bent down for a suprise bitch")
+SexButton("good good keep suckin my cock")
+SexButton("swallow my cock bitchass")
+SexButton("ima pay you 5 robux to suck my cock")
+SexButton("ugh.. that vag is so TIGHT~")
+SexButton("girl this pussy is so tight")
+SexButton("dang girl this pussy is so firee")
+-- homo tab
+HomophobicButton("stfu fag filth")
+HomophobicButton("yo check this out bro he has cock in his ass")
+HomophobicButton("hey wanna kill this fag with me?")
+HomophobicButton("nigga wtf is they/them LMAO")
+HomophobicButton('said the "they/them" bitchass')
+HomophobicButton("those fag filths needs to be raped")
+HomophobicButton("hey dude lets rape this fag together!")
+HomophobicButton("whos gonna tell those niggas those flags are just color ong")
+HomophobicButton("hang a autistic fag for 10 robux")
+HomophobicButton("MrBreast Challenge! rape an autistic fag for 100 robux!")
+HomophobicButton("being a fag in 2024 is crazy bro")
+HomophobicButton("sorry i don't speak to fag's that is minor")
+HomophobicButton("thats crazy fag but no one gives a shi")
+HomophobicButton("when those niggas gonna realise the lgbt flag is just a random colors")
+HomophobicButton("what a mf fag go kys")
+-- main tab
+-- rp tab
+RoleplayButton("*starts to slowly cum*")
+RoleplayButton("*puts my hard cock in your mouth*")
+RoleplayButton("*tries to put dick in fastly in your ass*")
+RoleplayButton("*cum goes everywhere*")
+RoleplayButton("*starts to fuck harder* AHHH")
+RoleplayButton("*goes fast as fuck* AAAAAAAA")
+RoleplayButton("*puts my dick in her mouth*")
+RoleplayButton("*expands her pussy while fuckin*")
+RoleplayButton("*licks her pussy*")
+RoleplayButton("*smells her pussy from here*")
+RoleplayButton("*rapes harder*")
+-- rage tab
+RageButton("NIGGA STFU")
+RageButton("STFU FOR A MINUTE")
+RageButton("OMG NOT THIS HEADASS AGAIN!")
+RageButton("SHUT THE FUCK UP")
+RageButton("OMG WHEN THIS NIGGA IS GONNA SHUT UP")
+RageButton("BRO STOP BEATING YOUR MEAT TO FUCKIN ROBLOX!!")
+RageButton("NIGGA GO KYS")
+RageButton("WHAT A SHITTY ASS NIGGER GO FUCK YOURSELF")
+RageButton("MHM SHITTY TRY ME IM NOT BANNABLE")
+RageButton("I OWN YOU NIGGA STFU")
+RageButton("HAHA SHITTY ASS COMEDIAN")
+
+local customText = ""
+local tblButton = {}
+
+local function generateRandomName()
+    local characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    local name = ""
+    for _ = 1, 10 do
+        name = name .. characters:sub(math.random(1, #characters), math.random(1, #characters))
+    end
+    return name
+end
+
+local function findBypassByName(name)
+    for varName, data in pairs(tblButton) do
+        if data.Concept == name then
+            return varName
+        end
+    end
+    return nil
+end
+
+local CreateBypassTextbox = Config:CreateInput({
+    Name = "Bypass Text",
+    Text = "",
+    PlaceholderText = "Enter message to bypass",
+    Flag = "CreateBypassTextbox",
+    Callback = function(Text)
+        customText = Text
+    end
+})
+
+local CreateBypass = Config:CreateButton({
+    Name = "Create Bypass",
+    Callback = function()
+        if #tblButton >= 5 then
+            print("Cannot add more than 5 bypasses.")
+            return
+        end
+
+        local existingVar = findBypassByName(customText)
+        if existingVar then
+            print("This bypass name is already used.")
+            return
+        end
+
+        local varName = generateRandomName()
+        tblButton[varName] = { Concept = customText }
+        MakeTheButton(Config, customText)
+        print("Created bypass with variable: " .. varName)
+    end
+})
+
+local bypassDivider = Config:CreateDivider()
+
+function RETURNTHEFUCKINGNERDSHITS()
+    return HWID.." - "..Player.Name
+end
+
+ADMINTab:CreateLabel("HWID - Username")
+ADMINTab:CreateLabel(RETURNTHEFUCKINGNERDSHITS())
+
+local function addToBlacklist(playerName)
+    if not table.find(blacklist, playerName) then
+        table.insert(blacklist, playerName)
+Rayfield:Notify({
+    Title = "Admin",
+    Content = "Added "..playerName.." to blacklist.",
+    Duration = 8.5,
+    Image = 4483362458,
+    Actions = {
+        Ignore = {
+            Name = "Okay!",
+            Callback = function()
+            end
+        }
+    }
+})
+    else    
+Rayfield:Notify({
+    Title = "Admin",
+    Content = "The "..playerName.." is already in blacklist.",
+    Duration = 8.5,
+    Image = 4483362458,
+    Actions = {
+        Ignore = {
+            Name = "Okay!",
+            Callback = function()
+            end
+        }
+    }
+})
+    end
+end
+
+local changeText = ADMINTab:CreateInput({
+    Name = "Ban player",
+    PlaceholderText = "Enter player username.",
+    Callback = function (Text)
+        addToBlacklist(Text)
+    end
+})
+
+local Announctment = ADMINTab:CreateParagraph({
+    Title = 'Enter message and press "Send" button.',
+    Content = '[Channel]: Script logs'
+})
+
+local textymexty
+local webhookSender = ADMINTab:CreateInput({
+    Name = "[W] Send a message to script log.",
+    PlaceholderText = "Enter message",
+    Callback = function(Text)
+        textymexty=Text
+    end
+})
+
+ADMINTab:CreateButton({
+    Name = "Send",
+    Callback = function()
+        http_request({
+            Url = webhook,
+            Method = "POST",
+            Headers = {
+                ['Content-Type']="application/json"
+            },
+            Body=HTTPPP:JSONEncode({
+                ["content"]=textymexty,
+            })
+        })
+    end
+})
+
+for i, value in ipairs(blacklist) do
+    if Player.Name == value then
+        kick("Your banned lil bro.")
+    end
+end
+
+local currentGameName = gameIds[game.PlaceId]
+
+if currentGameName then
+    local BTab = Window:CreateTab("Booths", 88655102796043)
+
+    local decalId = 0
+    local newBoothText = ""
+
+    function customizeBooth(boothText, decal)
+        local args = {
+            [1] = "Update",
+            [2] = {
+                ["DescriptionText"] = boothText,
+                ["ImageId"] = decal
+            }
+        }
+
+        ReplicatedStorage:WaitForChild("CustomiseBooth"):FireServer(unpack(args))  
+    end
+
+    local boothsWarning = BTab:CreateParagraph({
+        Title = "Booths",
+        Content = "We have detected that you are playing Rate My Avatar! Here are some booth bypasses:"
+    })
+
+    local changeText = BTab:CreateInput({
+        Name = "Booth Text",
+        PlaceholderText = "Type Booth Text here.",
+        Callback = function (Text)
+            newBoothText = Text
+        end
+    })
+
+    local changeImageId = BTab:CreateInput({
+        Name = "Image ID",
+        PlaceholderText = "Type Decal ID here.",
+        Callback = function(Text)
+            decalId = Text
+        end
+    })
+
+    local updateBooth = BTab:CreateButton({
+        Name = "Update Booth",
+        Callback = function()
+            customizeBooth(newBoothText, decalId)
+        end
+    })
+
+    local boothSeperatorSpace = BTab:CreateSection("")
+
+    local boothSeperator = BTab:CreateSection("Booth Bypasses")
+
+    local fuckChatFilter = BTab:CreateButton({
+        Name = "fuck the chat filter",
+        Callback = function()
+            customizeBooth("󠀈f󠀈u󠀈󠀈c󠀈k󠀈thechatfilter", decalId)
+        end
+    })
+
+    local askDiddyAnything = BTab:CreateButton({
+        Name = "ask diddy anything",
+        Callback = function()
+            customizeBooth("󠀈ask󠀈d󠀈id󠀈d󠀈y󠀈anything󠀈", decalId)
+        end
+    })
+
+    local askRapist = BTab:CreateButton({
+        Name = "ask a rapist anything",
+        Callback = function()
+            customizeBooth("askar󠀈a󠀈pis󠀈tanything", decalId)
+        end
+    })
+
+    local askRaper = BTab:CreateButton({
+        Name = "ask a raper anything",
+        Callback = function()
+            customizeBooth("󠀈aska󠀈ra󠀈p󠀈er󠀈anything󠀈", decalId)
+        end
+    })
+
+    local kidsTouched = BTab:CreateButton({
+        Name = "guessing how many kids you've fucked",
+        Callback = function()
+            customizeBooth("guessinghowmanykids you've󠀈fuc󠀈ke󠀈d󠀈󠀈", decalId)
+        end
+    })
+
+    local freeDiddy = BTab:CreateButton({
+        Name = "FREE DIDDY!",
+        Callback = function()
+            customizeBooth("FR󠀈EE󠀈DI󠀈DD󠀈Y󠀈!󠀈", decalId)
+        end
+    })
+end
+
+if config.Debug then 
+    getgenv().RunnedRight = false
+end
+
+getgenv().RunnedRight = true
